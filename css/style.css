@@ -1,0 +1,337 @@
+:root {
+  --primary-color: #2e6be9;
+  --secondary-color: #8d92eb;
+  --accent-color: #3e47f5;
+  --background-color: rgb(243, 248, 252);
+  --text-color: #0a111b;
+  --gray-color: #9b9b9b;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Rubik", sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+input {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* MAIN */
+
+main {
+  padding: 6.4rem 2rem;
+}
+
+.container {
+  max-width: 130rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1.8rem;
+  grid-template-areas: "c w";
+
+  & .current {
+    grid-area: c;
+    border-radius: 8px;
+    padding: 3.2rem 4.8rem;
+    background-color: var(--background-color);
+    border: 1px solid var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-content: start;
+    animation: moveFromLeft 1s 0.2s backwards ease;
+
+    & .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      & h1 {
+        font-size: 3.2rem;
+      }
+
+      & .deg {
+        font-size: 3.2rem;
+        font-weight: bold;
+      }
+    }
+
+    & img {
+      width: 25rem;
+    }
+  }
+
+  & .week {
+    border-radius: 8px;
+    grid-area: w;
+
+    background-color: var(--background-color);
+    border: 1px solid var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+    animation: moveFromTop 1s 0.5s backwards ease;
+
+    & div {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+
+      & p {
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--gray-color);
+      }
+    }
+  }
+}
+
+.search {
+  background-color: var(--primary-color);
+  border: none;
+  position: fixed;
+  bottom: 4rem;
+  right: 4rem;
+  padding: 1rem;
+  border-radius: 100px;
+  line-height: 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s;
+  animation: moveFromBottom 0.5s ease;
+
+  & ion-icon {
+    font-size: 2.8rem;
+    color: #e0e7ff;
+    transition: color 0.4s;
+  }
+
+  &:hover {
+    transform: translateY(-1rem);
+    box-shadow: 0 0 0 1px inset var(--primary-color);
+    background-color: transparent;
+
+    & ion-icon {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.img-box {
+  display: flex;
+  align-items: center;
+}
+
+/* Search Section*/
+#search-section {
+  background: linear-gradient(0deg, var(--background-color) 10%, transparent);
+  backdrop-filter: blur(7px);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s;
+}
+
+#search-section button ion-icon {
+  font-size: 2.8rem;
+  color: var(--gray-color);
+  transition: all 0.4s;
+}
+
+#close-search {
+  position: absolute;
+  top: 2rem;
+  right: 4rem;
+  padding: 0.8rem;
+  border-radius: 100rem;
+  border: 1px solid var(--gray-color);
+  line-height: 0;
+  transition: border 0.5s;
+  background-color: transparent;
+
+  &:hover {
+    border-color: var(--primary-color);
+
+    & ion-icon {
+      color: var(--primary-color);
+    }
+  }
+}
+
+form:has(#search-input) {
+  margin: 0 6rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#search-input {
+  padding: 2rem;
+  font-size: 2rem;
+  max-width: 800px;
+  color: var(--text-color);
+  flex: 1;
+  border-radius: 1rem;
+  border: 1px solid var(--gray-color);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+}
+
+#search-input:focus-visible {
+  outline: none;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+#search-button {
+  margin-left: -6rem;
+  border: none;
+  padding: 1.2rem;
+  background-color: transparent;
+
+  & ion-icon:hover {
+    color: var(--primary-color);
+  }
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-500px);
+}
+
+/*Animations*/
+@keyframes moveFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(10rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}
+
+@keyframes moveFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-10rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-0rem);
+  }
+}
+
+@keyframes moveFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-0rem);
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "c"
+      "w";
+
+    & .week {
+      flex-direction: row;
+      justify-content: center;
+
+      & div {
+        flex: 1;
+      }
+
+      & div:not(:last-child) {
+        border-right: 1px solid var(--gray-color);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 35em) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "c"
+      "w";
+
+    & .current {
+      grid-area: c;
+      border-radius: 8px;
+      padding: 2rem;
+      background-color: var(--background-color);
+      border: 1px solid var(--text-color);
+      display: flex;
+      justify-content: space-between;
+      align-content: start;
+      animation: moveFromLeft 1s 0.2s backwards ease;
+
+      & .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        & h1 {
+          font-size: 2.4rem;
+        }
+
+        & .deg {
+          font-size: 2rem;
+          font-weight: bold;
+        }
+      }
+
+      & img {
+        width: 12rem;
+      }
+    }
+
+    & .week {
+      flex-direction: column;
+      justify-content: center;
+
+      & div {
+        flex: 1;
+      }
+
+      & div:not(:last-child) {
+        border-right: 1px solid var(--gray-color);
+      }
+    }
+  }
+}

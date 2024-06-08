@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+      name="viewport" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet" />
+
+    <script
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+      type="module"></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <link href="./css/style.css" rel="stylesheet" />
+    <script defer src="./js/script.js"></script>
+    <title>Weather app</title>
+  </head>
+  <body>
+    <main>
+      <div class="container"></div>
+    </main>
+
+    <button class="search" onclick="toggleSearchSection()">
+      <ion-icon name="search-outline"></ion-icon>
+    </button>
+
+    <section class="hidden" id="search-section">
+      <form id="search-form">
+        <input
+          id="search-input"
+          name="search"
+          placeholder="Recherche..."
+          type="text" />
+        <button id="search-button" type="submit">
+          <ion-icon name="search-outline"></ion-icon>
+        </button>
+      </form>
+      <button id="close-search" onclick="toggleSearchSection()">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </section>
+  </body>
+</html>
