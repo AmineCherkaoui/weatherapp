@@ -1,10 +1,7 @@
 :root {
-  --primary-color: #2e6be9;
-  --secondary-color: #8d92eb;
-  --accent-color: #3e47f5;
-  --background-color: rgb(243, 248, 252);
-  --text-color: #0a111b;
-  --gray-color: #9b9b9b;
+  --primary-color: #008fff;
+  --background-color: #f4f4fb;
+  --text-color: #1a2744;
 }
 
 *,
@@ -13,6 +10,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 html {
@@ -24,6 +22,7 @@ body {
   font-family: "Rubik", sans-serif;
   color: var(--text-color);
   background-color: var(--background-color);
+  transition: background-color  0.5s , color 0.5s;
 }
 
 input {
@@ -37,10 +36,15 @@ button {
 /* MAIN */
 
 main {
-  padding: 6.4rem 2rem;
+  padding: 7.2rem 2rem;
+  display: flex;
+  align-items: center;
+  min-height: 100dvh;
 }
 
 .container {
+
+  flex: 1;
   max-width: 130rem;
   margin: 0 auto;
   display: grid;
@@ -58,6 +62,7 @@ main {
     justify-content: space-between;
     align-content: start;
     animation: moveFromLeft 1s 0.2s backwards ease;
+    transition: all 0.5s;
 
     & .info {
       display: flex;
@@ -66,6 +71,8 @@ main {
 
       & h1 {
         font-size: 3.2rem;
+        margin-bottom: 1rem;
+        line-height: 1;
       }
 
       & .deg {
@@ -89,7 +96,7 @@ main {
     flex-direction: column;
     align-content: center;
     justify-content: center;
-
+    transition: all 0.5s;
     animation: moveFromTop 1s 0.5s backwards ease;
 
     & div {
@@ -105,7 +112,7 @@ main {
       }
 
       &:not(:last-child) {
-        border-bottom: 1px solid var(--gray-color);
+        border-bottom: 1px solid var(--text-color);
       }
     }
   }
@@ -126,13 +133,44 @@ main {
 
   & ion-icon {
     font-size: 2.8rem;
-    color: #e0e7ff;
+    color: var(--background-color);
     transition: color 0.4s;
   }
 
   &:hover {
     transform: translateY(-1rem);
     box-shadow: 0 0 0 1px inset var(--primary-color);
+    background-color: transparent;
+
+    & ion-icon {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.dark-mode{
+  position: absolute;
+  top: 2rem;
+  left: 4rem;
+  z-index: 100;
+  padding: 1rem;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 100px;
+  line-height: 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s;
+  animation: moveFromTop 0.5s ease;
+
+  & ion-icon {
+    font-size: 2.8rem;
+    color: var(--background-color);
+    transition: color 0.4s;
+  }
+
+  &:hover {
+    transform: rotate(25deg);
+    box-shadow: 0 0 0 1px inset var(--primary-color) ;
     background-color: transparent;
 
     & ion-icon {
@@ -160,7 +198,7 @@ main {
 
 #search-section button ion-icon {
   font-size: 2.8rem;
-  color: var(--gray-color);
+  color: var(--text-color);
   transition: all 0.4s;
 }
 
@@ -170,7 +208,7 @@ main {
   right: 4rem;
   padding: 0.8rem;
   border-radius: 100rem;
-  border: 1px solid var(--gray-color);
+  border: 1px solid var(--text-color);
   line-height: 0;
   transition: border 0.5s;
   background-color: transparent;
@@ -198,7 +236,7 @@ form:has(#search-input) {
   color: var(--text-color);
   flex: 1;
   border-radius: 1rem;
-  border: 1px solid var(--gray-color);
+  border: 1px solid var(--text-color);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   background-color: var(--background-color);
 }
@@ -208,6 +246,8 @@ form:has(#search-input) {
   color: var(--primary-color);
   border-color: var(--primary-color);
 }
+
+
 
 #search-button {
   margin-left: -6rem;
@@ -225,6 +265,7 @@ form:has(#search-input) {
   visibility: hidden;
   pointer-events: none;
   transform: translateY(-500px);
+  display: none;
 }
 
 /*Animations*/
@@ -277,7 +318,7 @@ form:has(#search-input) {
       }
 
       & div:not(:last-child) {
-        border-right: 1px solid var(--gray-color);
+        border-right: 1px solid var(--text-color);
       }
     }
   }
@@ -291,15 +332,9 @@ form:has(#search-input) {
       "w";
 
     & .current {
-      grid-area: c;
-      border-radius: 8px;
+
       padding: 2rem;
-      background-color: var(--background-color);
-      border: 1px solid var(--text-color);
-      display: flex;
-      justify-content: space-between;
-      align-content: start;
-      animation: moveFromLeft 1s 0.2s backwards ease;
+
 
       & .info {
         display: flex;
@@ -308,6 +343,7 @@ form:has(#search-input) {
 
         & h1 {
           font-size: 2.4rem;
+          margin-bottom: 0.4rem;
         }
 
         & .deg {
@@ -330,7 +366,7 @@ form:has(#search-input) {
       }
 
       & div:not(:last-child) {
-        border-right: 1px solid var(--gray-color);
+        border-right: 1px solid var(--text-color);
       }
     }
   }

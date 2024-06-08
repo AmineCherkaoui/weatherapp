@@ -8,19 +8,20 @@ const getWeather = function (url) {
     const {
       current,
       location,
-      forecast: {forecastday},
+      forecast: { forecastday },
     } = JSON.parse(this.responseText);
     current.condition.icon = current.condition.icon.replace("64x64", "128x128");
     current.condition.icon = current.condition.icon.replace("//", "https://");
     let weeks = "";
     forecastday.map((day, i) => {
-    day.day.condition.icon = day.day.condition.icon.replace("//", "https://");
+      day.day.condition.icon = day.day.condition.icon.replace("//", "https://");
       let date = new Date(day.date);
       let weekday =
         i === 0
           ? "Aujourd'hui"
           : new Intl.DateTimeFormat("fr-FR", {
-              weekday: "long",
+              weekday: "short",
+              day: "numeric",
             }).format(date);
       weeks += `
             <div>
@@ -65,24 +66,46 @@ document.querySelector("#search-form").addEventListener("submit", function (e) {
   let city = document.querySelector("#search-input").value;
   if (!city) return;
   getWeather(
-    `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=3&lang=fr`
+    `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=3&lang=fr`,
   );
   toggleSearchSection();
 });
 
-
 navigator.geolocation.getCurrentPosition(
   function (position) {
     if (navigator.geolocation) {
-      const {latitude,longitude} = position.coords;
+      const { latitude, longitude } = position.coords;
       getWeather(
-        `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${latitude},${longitude}&days=3&lang=fr&lang=fr`
+        `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${latitude},${longitude}&days=3&lang=fr&lang=fr`,
       );
     }
   },
   function () {
     alert("La localisation n'est pas autorisée.");
-    toggleSearchSection(); 
-  }
+    toggleSearchSection();
+  },
 );
 
+document.querySelector(".dark-mode").addEventListener("click", function () {
+  [...this.children].forEach((child) => {
+    child.classList.toggle("hidden");
+  });
+  let darkmode = {
+    "--primary-color": "#82c5fc",
+    "--background-color": "#1a2744",
+    "--text-color": "#f4f4fb",
+  };
+  if (
+    !document
+      .querySelector("ion-icon[name='sunny-outline']")
+      .classList.contains("hidden")
+  )
+    for (const [prop, val] of Object.entries(darkmode)) {
+      document.documentElement.style.setProperty(prop, val);
+    }
+  else {
+    for (const [prop, val] of Object.entries(darkmode)) {
+      document.documentElement.style.setProperty(prop, "");
+    }
+  }
+});
