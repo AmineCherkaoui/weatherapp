@@ -61,6 +61,32 @@ const toggleSearchSection = function () {
   document.querySelector("#search-section").classList.toggle("hidden");
 };
 
+const switchToMode=function(){
+    [...document.querySelector(".dark-mode").children].forEach((child) => {
+      child.classList.toggle("hidden");
+    });
+    let darkmode = {
+      "--primary-color": "#82c5fc",
+      "--background-color": "#1a2744",
+      "--text-color": "#f4f4fb",
+    };
+    if (
+        !document
+            .querySelector("ion-icon[name='sunny-outline']")
+            .classList.contains("hidden")
+    )
+      for (const [prop, val] of Object.entries(darkmode)) {
+        document.documentElement.style.setProperty(prop, val);
+        localStorage.setItem("mode", "dark");
+      }
+    else {
+      for (const [prop, val] of Object.entries(darkmode)) {
+        document.documentElement.style.setProperty(prop, "");
+        localStorage.removeItem("mode");
+      }
+    }
+}
+
 document.querySelector("#search-form").addEventListener("submit", function (e) {
   e.preventDefault();
   let city = document.querySelector("#search-input").value;
@@ -86,26 +112,14 @@ navigator.geolocation.getCurrentPosition(
   },
 );
 
-document.querySelector(".dark-mode").addEventListener("click", function () {
-  [...this.children].forEach((child) => {
-    child.classList.toggle("hidden");
-  });
-  let darkmode = {
-    "--primary-color": "#82c5fc",
-    "--background-color": "#1a2744",
-    "--text-color": "#f4f4fb",
-  };
-  if (
-    !document
-      .querySelector("ion-icon[name='sunny-outline']")
-      .classList.contains("hidden")
-  )
-    for (const [prop, val] of Object.entries(darkmode)) {
-      document.documentElement.style.setProperty(prop, val);
-    }
-  else {
-    for (const [prop, val] of Object.entries(darkmode)) {
-      document.documentElement.style.setProperty(prop, "");
-    }
+
+
+document.querySelector(".dark-mode").addEventListener("click", switchToMode);
+
+window.addEventListener("load",function(){
+  let mode = localStorage.getItem("mode")
+  if(mode){
+    switchToMode()
   }
-});
+
+})
